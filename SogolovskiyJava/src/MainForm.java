@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -7,7 +8,6 @@ import java.util.List;
 
 public class MainForm extends JDialog {
     private JPanel contentPane;
-    private JButton buttonCancel;
     private JTextField insertSevenField;
     private JButton sevenButton;
     private JLabel sevenLabel;
@@ -17,17 +17,16 @@ public class MainForm extends JDialog {
     private JButton nameButton;
     private JLabel answerNameLabel;
     private JLabel arrayLabel;
-    private JTextField InsertNewArrField;
+    private JTextField insertNewArrField;
     private JTextField arrayNowLabel;
     private JLabel newArrayLabel;
     private JButton updateArrayButton;
     private JLabel updateArrayLabel;
     private JButton modThreeButton;
     private JTextField arrayModField;
+    private JLabel arrNowLabel;
 
     public MainForm() {
-        setContentPane(contentPane);
-        setModal(true);
 
         int[] intArray = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         arrayNowLabel.setText(Arrays.toString(intArray));
@@ -55,27 +54,6 @@ public class MainForm extends JDialog {
                 onModThreeButton();
             }
         });
-
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
-        });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     // Обработчик нажатия кнопки Проверить число
@@ -108,12 +86,13 @@ public class MainForm extends JDialog {
         }
 
     }
+
     // Обработчик нажатия кнопки Проверить имя
     private void onNameButton() {
         //Получаем текст из текстового поля
         String text = insertNameField.getText();
         try {
-                //Проверяем текст на совпадение
+            //Проверяем текст на совпадение
             if (text.equals("Вячеслав")) {
                 // Выводим результат
                 answerNameLabel.setText(String.format("Привет, %s", text));
@@ -137,10 +116,11 @@ public class MainForm extends JDialog {
         }
 
     }
+
     //Обработчик нажатия кнопки обновить массив
     private void onUpdateArrayButton() {
         //Достаем текст из тестового поля
-        String arrayText = InsertNewArrField.getText();
+        String arrayText = insertNewArrField.getText();
         String[] parsedArrayText = null;
         boolean isUpdate = true;
         try {
@@ -205,16 +185,15 @@ public class MainForm extends JDialog {
 
     }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
-    }
 
     public static void main(String[] args) {
-        MainForm dialog = new MainForm();
-        dialog.setSize(400, 600);
-        dialog.setVisible(true);
-        System.exit(0);
+
+        JFrame frame = new JFrame("SogolovskiyJava");
+        frame.setContentPane(new MainForm().contentPane);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500,500);
+        frame.setVisible(true);
+
     }
 
 
