@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainForm extends JDialog {
+public class MainForm {
     private JPanel contentPane;
     private JTextField insertSevenField;
     private JButton sevenButton;
